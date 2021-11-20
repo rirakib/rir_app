@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/screen/home_screen.dart';
 
 class  Work extends StatelessWidget {
   const Work({ Key? key }) : super(key: key);
@@ -9,29 +10,38 @@ class  Work extends StatelessWidget {
     return MaterialApp
     (
       title: 'work',
-      home: WorkClass(),
+      home: DefaultTabController(length: 3, child: workTab()),
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
     );
   }
 }
-class WorkClass extends StatefulWidget {
-  const WorkClass({ Key? key }) : super(key: key);
+
+class workTab extends StatefulWidget {
+  const workTab({ Key? key }) : super(key: key);
 
   @override
-  _WorkClassState createState() => _WorkClassState();
+  _workTabState createState() => _workTabState();
 }
 
-class _WorkClassState extends State<WorkClass> {
+class _workTabState extends State<workTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Testimonial'),
-        leading: IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-        }, icon: Icon(Icons.arrow_back)),
-      ),
+      appBar: TabBar(tabs: [
+        Tab(child: Text('Landing Page'),),
+        Tab(child: Text('Ecommerce'),),
+        Tab(child: Text('App'),)
+      ]),
+
+      body: TabBarView(children: [
+        Center(child: Text('Landing page Desing'),),
+        Center(child: Text('Ecommerce  page Desing'),),
+        Center(child: Text('Mobile App Desing'),),
+      ]),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+      },child: Icon(Icons.home),),
     );
   }
 }
